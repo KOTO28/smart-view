@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
@@ -53,16 +54,23 @@ public class SmartView {
     }
 
     @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void onKeyInput(InputEvent.KeyInputEvent event) {
-        handleInput();
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END) {
+            handleInput();
+        }
     }
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void onMouseInput(InputEvent.MouseInputEvent event) {
-        handleInput();
-    }
+    // @SubscribeEvent
+    // @SideOnly(Side.CLIENT)
+    // public void onKeyInput(InputEvent.KeyInputEvent event) {
+    // handleInput();
+    // }
+
+    // @SubscribeEvent
+    // @SideOnly(Side.CLIENT)
+    // public void onMouseInput(InputEvent.MouseInputEvent event) {
+    // handleInput();
+    // }
 
     @SideOnly(Side.CLIENT)
     private void handleInput() {
