@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "smartview",
+    "name": "Smart View",
+    "description": "",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["KOTO28"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
