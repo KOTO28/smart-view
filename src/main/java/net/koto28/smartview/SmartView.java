@@ -25,6 +25,12 @@ public class SmartView {
     public static KeyBinding viewThirdBack;
     public static KeyBinding viewThirdFront;
 
+    // Key state tracking
+    @SideOnly(Side.CLIENT)
+    private boolean wasThirdBackPressed = false;
+    @SideOnly(Side.CLIENT)
+    private boolean wasThirdFrontPressed = false;
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         // Initialization code
@@ -39,7 +45,7 @@ public class SmartView {
 
     @SideOnly(Side.CLIENT)
     private void initKeyBindings() {
-        // Create key binding (default key: G) with custom category
+        // Create key binding
         viewThirdBack = new KeyBinding("key.smartview.third.back", Keyboard.KEY_G, "key.categories.smartview");
         ClientRegistry.registerKeyBinding(viewThirdBack);
         viewThirdFront = new KeyBinding("key.smartview.third.front", Keyboard.KEY_H, "key.categories.smartview");
@@ -49,32 +55,47 @@ public class SmartView {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (viewThirdBack.isPressed()) {
-            // Process when key is pressed
-            changeView(0);
-        } else if (viewThirdFront.isPressed()) {
-            // Process when H key is pressed
-            changeView(1);
+        boolean isThirdBackPressed = viewThirdBack.isKeyDown();
+        boolean isThirdFrontPressed = viewThirdFront.isKeyDown();
+
+        if (isThirdBackPressed != wasThirdBackPressed) {
+            if (isThirdBackPressed) {
+                changeView(1);
+            } else {
+                changeView(0);
+            }
         }
+        if (isThirdFrontPressed != wasThirdFrontPressed) {
+            if (isThirdFrontPressed) {
+                changeView(2);
+            } else {
+                changeView(0);
+            }
+        }
+
+        // Update previous state
+        wasThirdBackPressed = isThirdBackPressed;
+        wasThirdFrontPressed = isThirdFrontPressed;
     }
 
+    /**
+     * changeView
+     * 
+     * @param viewType The type of view to switch to.
+     *                 <ul>
+     *                 <li>0 - First-person view</li>
+     *                 <li>1 - Third-person back view</li>
+     *                 <li>2 - Third-person front view</li>
+     *                 </ul>
+     */
     @SideOnly(Side.CLIENT)
     private void changeView(int viewType) {
+        if (viewType < 0 || viewType > 2) {
+            throw new IllegalArgumentException("Invalid view type: " + viewType);
+        }
         Minecraft mc = Minecraft.getMinecraft();
         GameSettings settings = mc.gameSettings;
-
-        if (viewType == 0) {
-            // Change to third-person back view
-            settings.thirdPersonView = 1;
-            if (mc.thePlayer != null) {
-                mc.thePlayer.addChatMessage(new ChatComponentText("Third Person Back View"));
-            }
-        } else if (viewType == 1) {
-            // Change to third-person front view
-            settings.thirdPersonView = 2;
-            if (mc.thePlayer != null) {
-                mc.thePlayer.addChatMessage(new ChatComponentText("Third Person Front View"));
-            }
-        }
+        // Change to third-person back view
+        settings.thirdPersonView = viewType;
     }
 }
