@@ -55,6 +55,17 @@ public class SmartView {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onKeyInput(InputEvent.KeyInputEvent event) {
+        handleInput();
+    }
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public void onMouseInput(InputEvent.MouseInputEvent event) {
+        handleInput();
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void handleInput() {
         boolean isFrontViewPressed = FrontView.isKeyDown();
         boolean isBackViewPressed = BackView.isKeyDown();
 
