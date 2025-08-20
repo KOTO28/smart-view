@@ -22,14 +22,14 @@ public class SmartView {
 
     // Key binding definition
     @SideOnly(Side.CLIENT)
-    public static KeyBinding viewThirdBack;
-    public static KeyBinding viewThirdFront;
+    public static KeyBinding FrontView;
+    public static KeyBinding BackView;
 
     // Key state tracking
     @SideOnly(Side.CLIENT)
-    private boolean wasThirdBackPressed = false;
+    private boolean wasFrontViewPressed = false;
     @SideOnly(Side.CLIENT)
-    private boolean wasThirdFrontPressed = false;
+    private boolean wasBackViewPressed = false;
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -46,27 +46,27 @@ public class SmartView {
     @SideOnly(Side.CLIENT)
     private void initKeyBindings() {
         // Create key binding
-        viewThirdBack = new KeyBinding("key.smartview.third.back", Keyboard.KEY_G, "key.categories.smartview");
-        ClientRegistry.registerKeyBinding(viewThirdBack);
-        viewThirdFront = new KeyBinding("key.smartview.third.front", Keyboard.KEY_H, "key.categories.smartview");
-        ClientRegistry.registerKeyBinding(viewThirdFront);
+        FrontView = new KeyBinding("key.smartview.view.front", Keyboard.KEY_G, "key.categories.smartview");
+        ClientRegistry.registerKeyBinding(FrontView);
+        BackView = new KeyBinding("key.smartview.view.back", Keyboard.KEY_H, "key.categories.smartview");
+        ClientRegistry.registerKeyBinding(BackView);
     }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public void onKeyInput(InputEvent.KeyInputEvent event) {
-        boolean isThirdBackPressed = viewThirdBack.isKeyDown();
-        boolean isThirdFrontPressed = viewThirdFront.isKeyDown();
+        boolean isFrontViewPressed = FrontView.isKeyDown();
+        boolean isBackViewPressed = BackView.isKeyDown();
 
-        if (isThirdBackPressed != wasThirdBackPressed) {
-            if (isThirdBackPressed) {
+        if (isFrontViewPressed != wasFrontViewPressed) {
+            if (isFrontViewPressed) {
                 changeView(1);
             } else {
                 changeView(0);
             }
         }
-        if (isThirdFrontPressed != wasThirdFrontPressed) {
-            if (isThirdFrontPressed) {
+        if (isBackViewPressed != wasBackViewPressed) {
+            if (isBackViewPressed) {
                 changeView(2);
             } else {
                 changeView(0);
@@ -74,8 +74,8 @@ public class SmartView {
         }
 
         // Update previous state
-        wasThirdBackPressed = isThirdBackPressed;
-        wasThirdFrontPressed = isThirdFrontPressed;
+        wasFrontViewPressed = isFrontViewPressed;
+        wasBackViewPressed = isBackViewPressed;
     }
 
     /**
@@ -84,8 +84,8 @@ public class SmartView {
      * @param viewType The type of view to switch to.
      *                 <ul>
      *                 <li>0 - First-person view</li>
-     *                 <li>1 - Third-person back view</li>
-     *                 <li>2 - Third-person front view</li>
+     *                 <li>1 - Third-person front view</li>
+     *                 <li>2 - Third-person back view</li>
      *                 </ul>
      */
     @SideOnly(Side.CLIENT)
@@ -95,7 +95,6 @@ public class SmartView {
         }
         Minecraft mc = Minecraft.getMinecraft();
         GameSettings settings = mc.gameSettings;
-        // Change to third-person back view
         settings.thirdPersonView = viewType;
     }
 }
