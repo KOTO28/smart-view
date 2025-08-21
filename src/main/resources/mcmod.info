@@ -9,7 +9,7 @@
     "updateUrl": "",
     "authorList": ["KOTO28"],
     "credits": "",
-    "logoFile": "",
+    "logoFile": "assets/smartview/logo.png",
     "screenshots": [],
     "dependencies": []
   }
