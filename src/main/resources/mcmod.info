@@ -2,7 +2,7 @@
   {
     "modid": "smartview",
     "name": "Smart View",
-    "description": "",
+    "description": "A mod that allows you to switch viewpoints by holding down the button.",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "https://github.com/KOTO28/smart-view",
