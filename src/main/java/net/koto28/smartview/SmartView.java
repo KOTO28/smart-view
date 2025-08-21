@@ -47,9 +47,9 @@ public class SmartView {
     @SideOnly(Side.CLIENT)
     private void initKeyBindings() {
         // Create key binding
-        FrontView = new KeyBinding("key.smartview.view.front", Keyboard.KEY_G, "key.categories.smartview");
+        FrontView = new KeyBinding("key.smartview.view.front", Keyboard.KEY_NONE, "key.categories.smartview");
         ClientRegistry.registerKeyBinding(FrontView);
-        BackView = new KeyBinding("key.smartview.view.back", Keyboard.KEY_H, "key.categories.smartview");
+        BackView = new KeyBinding("key.smartview.view.back", Keyboard.KEY_NONE, "key.categories.smartview");
         ClientRegistry.registerKeyBinding(BackView);
     }
 
