@@ -4,7 +4,7 @@
   <img alt="logo" src="image/logo.png" />
 </p>
 
-![GitHub Release](https://img.shields.io/github/v/release/koto28/smart-view)
+[![GitHub Release](https://img.shields.io/github/v/release/koto28/smart-view)](https://github.com/KOTO28/smart-view/releases/latest)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/koto28/smart-view/total)
 
 English | [日本語](README_ja.md)
