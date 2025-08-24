@@ -19,18 +19,18 @@ import org.lwjgl.input.Keyboard;
 @Mod(modid = SmartView.MODID, version = SmartView.VERSION)
 public class SmartView {
     public static final String MODID = "smartview";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.1";
 
     // Key binding definition
     @SideOnly(Side.CLIENT)
-    public static KeyBinding FrontView;
     public static KeyBinding BackView;
+    public static KeyBinding FrontView;
 
     // Key state tracking
     @SideOnly(Side.CLIENT)
-    private boolean wasFrontViewPressed = false;
-    @SideOnly(Side.CLIENT)
     private boolean wasBackViewPressed = false;
+    @SideOnly(Side.CLIENT)
+    private boolean wasFrontViewPressed = false;
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -47,10 +47,10 @@ public class SmartView {
     @SideOnly(Side.CLIENT)
     private void initKeyBindings() {
         // Create key binding
-        FrontView = new KeyBinding("key.smartview.view.front", Keyboard.KEY_NONE, "key.categories.smartview");
-        ClientRegistry.registerKeyBinding(FrontView);
         BackView = new KeyBinding("key.smartview.view.back", Keyboard.KEY_NONE, "key.categories.smartview");
         ClientRegistry.registerKeyBinding(BackView);
+        FrontView = new KeyBinding("key.smartview.view.front", Keyboard.KEY_NONE, "key.categories.smartview");
+        ClientRegistry.registerKeyBinding(FrontView);
     }
 
     @SubscribeEvent
@@ -74,18 +74,18 @@ public class SmartView {
 
     @SideOnly(Side.CLIENT)
     private void handleInput() {
-        boolean isFrontViewPressed = FrontView.isKeyDown();
         boolean isBackViewPressed = BackView.isKeyDown();
+        boolean isFrontViewPressed = FrontView.isKeyDown();
 
-        if (isFrontViewPressed != wasFrontViewPressed) {
-            if (isFrontViewPressed) {
+        if (isBackViewPressed != wasBackViewPressed) {
+            if (isBackViewPressed) {
                 changeView(1);
             } else {
                 changeView(0);
             }
         }
-        if (isBackViewPressed != wasBackViewPressed) {
-            if (isBackViewPressed) {
+        if (isFrontViewPressed != wasFrontViewPressed) {
+            if (isFrontViewPressed) {
                 changeView(2);
             } else {
                 changeView(0);
@@ -93,8 +93,8 @@ public class SmartView {
         }
 
         // Update previous state
-        wasFrontViewPressed = isFrontViewPressed;
         wasBackViewPressed = isBackViewPressed;
+        wasFrontViewPressed = isFrontViewPressed;
     }
 
     /**
@@ -103,8 +103,8 @@ public class SmartView {
      * @param viewType The type of view to switch to.
      *                 <ul>
      *                 <li>0 - First-person view</li>
-     *                 <li>1 - Third-person front view</li>
-     *                 <li>2 - Third-person back view</li>
+     *                 <li>1 - Third-person back view</li>
+     *                 <li>2 - Third-person front view</li>
      *                 </ul>
      */
     @SideOnly(Side.CLIENT)
