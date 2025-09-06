@@ -31,3 +31,4 @@
 ## 対応バージョン
 
 - Minecraft Forge - MC 1.8.9
+- Minecraft Forge - MC 1.12.2

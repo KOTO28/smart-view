@@ -31,3 +31,4 @@ This mod provides the ability to switch viewpoints by holding down the button. B
 ## Compatible Versions
 
 - Minecraft Forge - MC 1.8.9
+- Minecraft Forge - MC 1.12.2
