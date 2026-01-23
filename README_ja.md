@@ -30,7 +30,7 @@
 
 ## 対応バージョン
 
-| Minecraft | Mod Loader |
-| --------- | ---------- |
-| 1.8.9     | Forge      |
-| 1.12.2    | Forge      |
+| Minecraft | Mod Loader | Latest Release                                                                                                                   |
+| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 1.8.9     | Forge      | [smartview-1.1-forge-mc1.8.9.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.8.9.jar)   |
+| 1.12.2    | Forge      | [smartview-1.1-forge-mc1.12.2.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.12.2.jar) |
