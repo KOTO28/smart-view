@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT License"
+issueTrackerURL="https://github.com/KOTO28/smart-view/issues"
+[[mods]]
+modId="smartview"
+version="1.1"
+displayName="Smart View"
+displayURL="https://github.com/KOTO28/smart-view"
+logoFile="logo.png"
+authors="KOTO28"
+description='''
+A mod that allows you to switch viewpoints by holding down the button.
+'''

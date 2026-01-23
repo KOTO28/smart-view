@@ -1,117 +1,115 @@
 package net.koto28.smartview;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.settings.PointOfView;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.event.TickEvent;
+import org.lwjgl.glfw.GLFW;
 
-@Mod(modid = SmartView.MODID, version = SmartView.VERSION)
+@Mod(SmartView.MODID)
+@Mod.EventBusSubscriber(modid = SmartView.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SmartView {
     public static final String MODID = "smartview";
     public static final String VERSION = "1.1";
 
     // Key binding definition
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public static KeyBinding BackView;
+    @OnlyIn(Dist.CLIENT)
     public static KeyBinding FrontView;
 
     // Key state tracking
-    @SideOnly(Side.CLIENT)
-    private boolean wasBackViewPressed = false;
-    @SideOnly(Side.CLIENT)
-    private boolean wasFrontViewPressed = false;
+    @OnlyIn(Dist.CLIENT)
+    private static boolean wasBackViewPressed = false;
+    @OnlyIn(Dist.CLIENT)
+    private static boolean wasFrontViewPressed = false;
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        // Initialization code
-        System.out.println("SmartView is initializing!");
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ClientSetup {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            // Create key bindings
+            BackView = new KeyBinding("key.smartview.view.back", GLFW.GLFW_KEY_UNKNOWN, "key.categories.smartview");
+            ClientRegistry.registerKeyBinding(BackView);
+            FrontView = new KeyBinding("key.smartview.view.front", GLFW.GLFW_KEY_UNKNOWN, "key.categories.smartview");
+            ClientRegistry.registerKeyBinding(FrontView);
 
-        // Register key binding on client side
-        if (event.getSide().isClient()) {
-            initKeyBindings();
-            MinecraftForge.EVENT_BUS.register(this);
+            MinecraftForge.EVENT_BUS.register(InputHandler.class);
         }
     }
 
-    @SideOnly(Side.CLIENT)
-    private void initKeyBindings() {
-        // Create key binding
-        BackView = new KeyBinding("key.smartview.view.back", Keyboard.KEY_NONE, "key.categories.smartview");
-        ClientRegistry.registerKeyBinding(BackView);
-        FrontView = new KeyBinding("key.smartview.view.front", Keyboard.KEY_NONE, "key.categories.smartview");
-        ClientRegistry.registerKeyBinding(FrontView);
-    }
-
-    @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
-            handleInput();
-        }
-    }
-
-    // @SubscribeEvent
-    // @SideOnly(Side.CLIENT)
-    // public void onKeyInput(InputEvent.KeyInputEvent event) {
-    // handleInput();
-    // }
-
-    // @SubscribeEvent
-    // @SideOnly(Side.CLIENT)
-    // public void onMouseInput(InputEvent.MouseInputEvent event) {
-    // handleInput();
-    // }
-
-    @SideOnly(Side.CLIENT)
-    private void handleInput() {
-        boolean isBackViewPressed = BackView.isKeyDown();
-        boolean isFrontViewPressed = FrontView.isKeyDown();
-
-        if (isBackViewPressed != wasBackViewPressed) {
-            if (isBackViewPressed) {
-                changeView(1);
-            } else {
-                changeView(0);
-            }
-        }
-        if (isFrontViewPressed != wasFrontViewPressed) {
-            if (isFrontViewPressed) {
-                changeView(2);
-            } else {
-                changeView(0);
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+    public static class InputHandler {
+        @SubscribeEvent
+        public static void onClientTick(TickEvent.ClientTickEvent event) {
+            if (event.phase == TickEvent.Phase.END) {
+                handleInput();
             }
         }
 
-        // Update previous state
-        wasBackViewPressed = isBackViewPressed;
-        wasFrontViewPressed = isFrontViewPressed;
-    }
+        @OnlyIn(Dist.CLIENT)
+        private static void handleInput() {
+            if (BackView == null || FrontView == null) {
+                return;
+            }
 
-    /**
-     * changeView
-     * 
-     * @param viewType The type of view to switch to.
-     *                 <ul>
-     *                 <li>0 - First-person view</li>
-     *                 <li>1 - Third-person back view</li>
-     *                 <li>2 - Third-person front view</li>
-     *                 </ul>
-     */
-    @SideOnly(Side.CLIENT)
-    private void changeView(int viewType) {
-        if (viewType < 0 || viewType > 2) {
-            throw new IllegalArgumentException("Invalid view type: " + viewType);
+            boolean isBackViewPressed = BackView.isDown();
+            boolean isFrontViewPressed = FrontView.isDown();
+
+            if (isBackViewPressed != wasBackViewPressed) {
+                if (isBackViewPressed) {
+                    changeView(1);
+                } else {
+                    changeView(0);
+                }
+            }
+            if (isFrontViewPressed != wasFrontViewPressed) {
+                if (isFrontViewPressed) {
+                    changeView(2);
+                } else {
+                    changeView(0);
+                }
+            }
+
+            // Update previous state
+            wasBackViewPressed = isBackViewPressed;
+            wasFrontViewPressed = isFrontViewPressed;
         }
-        Minecraft mc = Minecraft.getMinecraft();
-        GameSettings settings = mc.gameSettings;
-        settings.thirdPersonView = viewType;
+
+        /**
+         * changeView
+         * 
+         * @param viewType The type of view to switch to.
+         *                 <ul>
+         *                 <li>0 - First-person view</li>
+         *                 <li>1 - Third-person back view</li>
+         *                 <li>2 - Third-person front view</li>
+         *                 </ul>
+         */
+        @OnlyIn(Dist.CLIENT)
+        private static void changeView(int viewType) {
+            if (viewType < 0 || viewType > 2) {
+                throw new IllegalArgumentException("Invalid view type: " + viewType);
+            }
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.options != null) {
+                PointOfView[] cameraTypes = PointOfView.values();
+                // System.out.println("Available camera types:");
+                // for (int i = 0; i < cameraTypes.length; i++) {
+                // System.out.println(i + " - " + cameraTypes[i]);
+                // }
+                // System.out.println("Setting view to: " + viewType);
+                if (viewType < cameraTypes.length) {
+                    mc.options.setCameraType(cameraTypes[viewType]);
+                }
+            }
+        }
     }
 }
