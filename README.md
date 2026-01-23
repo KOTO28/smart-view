@@ -34,3 +34,4 @@ This mod provides the ability to switch viewpoints by holding down the button. B
 | --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | 1.8.9     | Forge      | [smartview-1.1-forge-mc1.8.9.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.8.9.jar)   |
 | 1.12.2    | Forge      | [smartview-1.1-forge-mc1.12.2.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.12.2.jar) |
+| 1.16.5    | Forge      | [smartview-1.1-forge-mc1.16.5.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.16.5.jar) |
