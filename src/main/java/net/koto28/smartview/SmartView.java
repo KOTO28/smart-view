@@ -1,13 +1,13 @@
 package net.koto28.smartview;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.settings.PointOfView;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.CameraType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.event.TickEvent;
@@ -21,9 +21,9 @@ public class SmartView {
 
     // Key binding definition
     @OnlyIn(Dist.CLIENT)
-    public static KeyBinding BackView;
+    public static KeyMapping BackView;
     @OnlyIn(Dist.CLIENT)
-    public static KeyBinding FrontView;
+    public static KeyMapping FrontView;
 
     // Key state tracking
     @OnlyIn(Dist.CLIENT)
@@ -34,12 +34,12 @@ public class SmartView {
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientSetup {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
+        public static void onClientSetup(RegisterKeyMappingsEvent event) {
             // Create key bindings
-            BackView = new KeyBinding("key.smartview.view.back", GLFW.GLFW_KEY_UNKNOWN, "key.categories.smartview");
-            ClientRegistry.registerKeyBinding(BackView);
-            FrontView = new KeyBinding("key.smartview.view.front", GLFW.GLFW_KEY_UNKNOWN, "key.categories.smartview");
-            ClientRegistry.registerKeyBinding(FrontView);
+            BackView = new KeyMapping("key.smartview.view.back", GLFW.GLFW_KEY_UNKNOWN, "key.categories.smartview");
+            event.register(BackView);
+            FrontView = new KeyMapping("key.smartview.view.front", GLFW.GLFW_KEY_UNKNOWN, "key.categories.smartview");
+            event.register(FrontView);
 
             MinecraftForge.EVENT_BUS.register(InputHandler.class);
         }
@@ -100,7 +100,7 @@ public class SmartView {
             }
             Minecraft mc = Minecraft.getInstance();
             if (mc.options != null) {
-                PointOfView[] cameraTypes = PointOfView.values();
+                CameraType[] cameraTypes = CameraType.values();
                 // System.out.println("Available camera types:");
                 // for (int i = 0; i < cameraTypes.length; i++) {
                 // System.out.println(i + " - " + cameraTypes[i]);
