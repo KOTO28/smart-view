@@ -30,9 +30,10 @@ This mod provides the ability to switch viewpoints by holding down the button. B
 
 ## Compatible Versions
 
-| Minecraft | Mod Loader | Latest Release                                                                                                                   |
-| --------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| 1.8.9     | Forge      | [smartview-1.1-forge-mc1.8.9.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.8.9.jar)   |
-| 1.12.2    | Forge      | [smartview-1.1-forge-mc1.12.2.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.12.2.jar) |
-| 1.16.5    | Forge      | [smartview-1.1-forge-mc1.16.5.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.16.5.jar) |
-| 1.20.1    | Forge      | [smartview-1.1-forge-mc1.20.1.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.20.1.jar) |
+| Minecraft | Mod Loader | Latest Release                                                                                                                     |
+| --------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| 1.8.9     | Forge      | [smartview-1.1-forge-mc1.8.9.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.8.9.jar)     |
+| 1.12.2    | Forge      | [smartview-1.1-forge-mc1.12.2.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.12.2.jar)   |
+| 1.16.5    | Fabric     | [smartview-1.1-fabric-mc1.16.5.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-fabric-mc1.16.5.jar) |
+| 1.16.5    | Forge      | [smartview-1.1-forge-mc1.16.5.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.16.5.jar)   |
+| 1.20.1    | Forge      | [smartview-1.1-forge-mc1.20.1.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.20.1.jar)   |
