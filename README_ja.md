@@ -37,4 +37,5 @@
 | 1.16.5    | Fabric     | [smartview-1.1-fabric-mc1.16.5.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-fabric-mc1.16.5.jar) |
 | 1.16.5    | Forge      | [smartview-1.1-forge-mc1.16.5.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.16.5.jar)   |
 | 1.17.1    | Fabric     | [smartview-1.1-fabric-mc1.17.1.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-fabric-mc1.17.1.jar) |
+| 1.18.2    | Fabric     | [smartview-1.1-fabric-mc1.18.2.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-fabric-mc1.18.2.jar) |
 | 1.20.1    | Forge      | [smartview-1.1-forge-mc1.20.1.jar](https://github.com/KOTO28/smart-view/releases/download/v1.1/smartview-1.1-forge-mc1.20.1.jar)   |
